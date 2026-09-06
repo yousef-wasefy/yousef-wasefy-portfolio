@@ -1,0 +1,765 @@
+/* =========================================================
+   Yousef Alwasefy — Portfolio
+   Single stylesheet, ordered top-to-bottom:
+   tokens, reset/base, a11y helpers, buttons, header/nav, hero,
+   content sections (About → Thank You), reduced-motion.
+   Font: Inter (loaded in index.html via Google Fonts).
+   Light theme only. Colours come from the tokens in :root.
+   ========================================================= */
+
+/* ---------- Design tokens ---------- */
+:root {
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --border: #e5e7eb;
+
+  --container-max: 1080px;
+  --container-pad: 24px;
+
+  --radius: 8px;
+  --nav-height: 64px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --container-pad: 20px;
+  }
+}
+
+/* ---------- Reset & base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 20px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  font-size: 1rem; /* 16px */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--accent);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* ---------- Layout container ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* ---------- Accessibility helpers ---------- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Skip-link target: focused programmatically, so no focus ring needed. */
+#main:focus {
+  outline: none;
+}
+
+/* Hidden from view but read by screen readers (e.g. "opens in a new tab"). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -56px;
+  z-index: 200;
+  padding: 10px 16px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  font: inherit;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn--primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn--secondary {
+  background-color: var(--surface);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn--secondary:hover {
+  background-color: #eff4ff;
+}
+
+.btn--small {
+  padding: 8px 16px;
+  font-size: 0.875rem; /* 14px */
+}
+
+/* ---------- Header & navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--nav-height);
+}
+
+.nav__brand {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.nav__brand:hover {
+  color: var(--accent);
+}
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav__link {
+  display: block;
+  padding: 8px 12px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color 0.15s ease;
+}
+
+.nav__link:hover {
+  color: var(--text-primary);
+}
+
+.nav__toggle {
+  display: none; /* shown on mobile only */
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.nav__toggle-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: 2px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .nav__toggle {
+    display: inline-flex;
+  }
+
+  .nav__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 6px 0 10px;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 6px 12px -8px rgba(15, 23, 42, 0.18);
+  }
+
+  .nav__toggle[aria-expanded="true"] ~ .nav__menu {
+    display: flex;
+  }
+
+  .nav__link {
+    padding: 12px var(--container-pad);
+    font-size: 1rem;
+  }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: 420px;
+  padding-block: 64px 44px;
+  background-color: var(--surface);
+}
+
+.hero__inner {
+  max-width: 720px;
+}
+
+.hero__name {
+  font-size: clamp(2.25rem, 6vw, 3.5rem); /* 36 – 56px */
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hero__title {
+  margin-top: 12px;
+  font-size: clamp(1.25rem, 3.5vw, 1.75rem); /* 20 – 28px */
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.hero__intro {
+  margin-top: 20px;
+  max-width: 60ch;
+  font-size: 1.125rem; /* 18px */
+  color: var(--text-secondary);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 0;
+    padding-block: 56px;
+  }
+
+  .hero__intro {
+    font-size: 1.0625rem; /* 17px */
+  }
+}
+
+@media (max-width: 420px) {
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+}
+
+/* ---------- Content sections ---------- */
+/* The page background is already --background, so a plain .section reads as
+   the light-grey band; .section--surface lifts a section to white. This is
+   the subtle alternation from the spec (Hero white, About grey, Education
+   white, ...). */
+.section {
+  padding-block: 88px;
+}
+
+.section--surface {
+  background-color: var(--surface);
+}
+
+.section__heading {
+  margin-bottom: 24px;
+  font-size: clamp(1.75rem, 1.35rem + 1.8vw, 2rem); /* 28 – 32px */
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* About ---------------------------------------------------- */
+.about__body {
+  max-width: 68ch;
+}
+
+.about__body p {
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.7;
+}
+
+.about__body p + p {
+  margin-top: 18px;
+}
+
+/* About sits directly above the USP card on the same background, so its
+   bottom padding is trimmed to keep the two feeling connected. */
+.section.about {
+  padding-bottom: 24px;
+}
+
+/* USP ----------------------------------------------------- */
+.usp {
+  padding-top: 24px; /* sits nearer to About, which shares this background */
+}
+
+.usp__statement {
+  max-width: 62ch;
+  margin: 0;
+  padding: 22px 26px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: 1.1875rem; /* ~19px */
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Education timeline ------------------------------------- */
+.timeline {
+  position: relative;
+  max-width: 640px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 5px;
+  width: 2px;
+  background-color: var(--border);
+}
+
+.timeline__item {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline__item + .timeline__item {
+  margin-top: 32px;
+}
+
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background-color: var(--surface);
+}
+
+.timeline__date {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.timeline__title {
+  margin-top: 6px;
+  font-size: 1.1875rem; /* ~19px */
+  font-weight: 700;
+}
+
+.timeline__subtitle {
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.timeline__desc {
+  margin-top: 10px;
+  color: var(--text-secondary);
+}
+
+.timeline__item .btn {
+  margin-top: 16px;
+}
+
+/* Skills ------------------------------------------------- */
+.skills__groups {
+  max-width: 760px;
+}
+
+.skill-group + .skill-group {
+  margin-top: 26px;
+}
+
+.skill-group__title {
+  margin-bottom: 12px;
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 700;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  font-size: 0.9375rem; /* 15px */
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/* C++ is a secondary skill (spec §17) — kept visually lighter. */
+.chip--muted {
+  background-color: transparent;
+  color: var(--text-secondary);
+}
+
+/* Work Experience + Offered Services cards -------------- */
+.exp-card,
+.service-card {
+  padding: 24px 26px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.exp-card {
+  max-width: 720px;
+}
+
+.exp-card__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+}
+
+.exp-card__org {
+  font-size: 1.1875rem; /* ~19px */
+  font-weight: 700;
+}
+
+.exp-card__date {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.exp-card__role {
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.exp-card__desc {
+  margin-top: 12px;
+  max-width: 60ch;
+  color: var(--text-secondary);
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 860px;
+}
+
+.service-card__title {
+  font-size: 1.1875rem; /* ~19px */
+  font-weight: 700;
+}
+
+.service-card__desc {
+  margin-top: 8px;
+  color: var(--text-secondary);
+}
+
+/* Projects --------------------------------------------- */
+/* Given the most visual weight on the page: full-width blocks, larger
+   titles and padding than the service cards, with clearly labelled parts. */
+.projects__list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.project {
+  padding: 30px 32px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.project__title {
+  font-size: clamp(1.375rem, 1.1rem + 1.2vw, 1.625rem); /* 22 – 26px */
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.project__type {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 10px;
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.project__desc {
+  margin-top: 16px;
+  max-width: 62ch; /* shorter, easier-to-scan lines */
+  font-size: 1.0625rem; /* 17px — matches the About paragraphs */
+  line-height: 1.65;
+}
+
+.project__block {
+  margin-top: 26px; /* more air between Technologies / Key Features / My Role */
+}
+
+.project__label {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.project__block .chips {
+  margin-top: 12px;
+}
+
+.project__features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 28px;
+  margin-top: 12px;
+}
+
+.project__features li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.9375rem; /* 15px */
+  color: var(--text-secondary);
+}
+
+.project__features li::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+.project__role {
+  margin-top: 12px;
+  max-width: 62ch; /* shorter, easier-to-scan lines */
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.project__link {
+  margin-top: 30px;
+}
+
+/* Contact --------------------------------------------- */
+.contact__text {
+  max-width: 60ch;
+  margin-bottom: 28px;
+  font-size: 1.0625rem; /* 17px */
+  color: var(--text-secondary);
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.contact-list__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-list__icon {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.contact-list__link {
+  min-width: 0;
+  color: var(--accent);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact-list__link:hover {
+  text-decoration: underline;
+}
+
+/* Thank You ------------------------------------------- */
+.thanks__inner {
+  max-width: 560px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.thanks .section__heading {
+  margin-bottom: 16px;
+}
+
+.thanks__text {
+  font-size: 1.0625rem; /* 17px */
+  color: var(--text-secondary);
+}
+
+.thanks__name {
+  margin-top: 24px;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 700;
+}
+
+.thanks__title {
+  margin-top: 2px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding-block: 60px;
+  }
+
+  .usp {
+    padding-top: 16px;
+  }
+
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project {
+    padding: 24px 22px;
+  }
+
+  .project__features {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
