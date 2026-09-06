@@ -1,0 +1,17 @@
+# Claude / local AI tooling
+.claude/
+
+# Internal project specification
+Yousef_Portfolio_Claude_Code_Spec.md
+
+# IDE / editor
+.vs/
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
