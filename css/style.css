@@ -136,6 +136,7 @@ ul {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   padding: 12px 22px;
   font: inherit;
   font-weight: 600;
@@ -146,6 +147,14 @@ ul {
   cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease,
     color 0.15s ease;
+}
+
+.btn__arrow {
+  transition: transform 0.15s ease;
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
 }
 
 .btn--primary {
@@ -294,11 +303,44 @@ ul {
   align-items: center;
   min-height: 420px;
   padding-block: 64px 44px;
-  background-color: var(--surface);
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #eef2ff 55%, #ede9fe 100%);
+}
+
+/* Text and decoration sit in one flex row so they share the available width
+   and can never overlap — the decoration just shrinks first (and is hidden
+   below the tablet breakpoint), instead of being layered on top of the text. */
+.hero__layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
 }
 
 .hero__inner {
+  flex: 1 1 380px;
   max-width: 720px;
+}
+
+/* Decorative layer: a large translucent YW watermark.
+   Purely visual — hidden from assistive tech, and never the reason the
+   page scrolls horizontally or crowds the text. */
+.hero__decor {
+  position: relative;
+  flex: 1 1 280px;
+  max-width: 420px;
+  min-width: 0;
+  height: 320px;
+  pointer-events: none;
+}
+
+.hero__mark {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 90%;
+  height: auto;
+  transform: translateY(-50%);
 }
 
 .hero__name {
@@ -326,6 +368,20 @@ ul {
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 32px;
+}
+
+/* Subtle lift on the hero's primary button only — matches the approved
+   reference without changing the shared .btn--primary used elsewhere. */
+.hero__actions .btn--primary {
+  box-shadow: 0 10px 24px -12px rgba(37, 99, 235, 0.45);
+}
+
+/* Below this, there isn't room for text + a large graphic side by side,
+   so the watermark and ring are hidden and the hero stays text-only. */
+@media (max-width: 900px) {
+  .hero__decor {
+    display: none;
+  }
 }
 
 @media (max-width: 600px) {

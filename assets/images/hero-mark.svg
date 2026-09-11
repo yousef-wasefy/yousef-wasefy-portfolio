@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 695 411">
+  <title>YW watermark</title>
+  <defs>
+    <linearGradient id="heroMarkAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+  </defs>
+  <!-- Y: traced from the reference logo mark -->
+  <path
+    fill="#111827"
+    d="M373,84 L265,84 L58,394 L165,394 Z M4,5 L145,217 L202,135 L126,9 Z"
+  />
+  <!-- W: traced from the reference logo mark -->
+  <path
+    fill="url(#heroMarkAccent)"
+    fill-opacity="0.85"
+    d="M690,84 L584,83 L481,231 L402,113 L310,252 L296,241 L251,306 L307,404 L397,281 L475,406 Z"
+  />
+</svg>

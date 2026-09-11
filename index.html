@@ -17,6 +17,8 @@
       rel="stylesheet"
     />
 
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -52,16 +54,44 @@
       <!-- Section 1 — Cover / Hero -->
       <section class="hero" id="top">
         <div class="container">
-          <div class="hero__inner">
-            <h1 class="hero__name">Yousef Alwasefy</h1>
-            <p class="hero__title">Junior .NET Backend Developer</p>
-            <p class="hero__intro">
-              Computer Science student at Ain Shams University focused on backend
-              development using C#, ASP.NET Core, REST APIs, and databases.
-            </p>
-            <div class="hero__actions">
-              <a class="btn btn--primary" href="#projects">View Projects</a>
-              <a class="btn btn--secondary" href="#contact">Contact Me</a>
+          <div class="hero__layout">
+            <div class="hero__inner">
+              <h1 class="hero__name">Yousef Alwasefy</h1>
+              <p class="hero__title">Junior .NET Backend Developer</p>
+              <p class="hero__intro">
+                Computer Science student at Ain Shams University focused on
+                backend development using C#, ASP.NET Core, REST APIs, and
+                databases.
+              </p>
+              <div class="hero__actions">
+                <a class="btn btn--primary" href="#projects">
+                  View Projects
+                  <svg
+                    class="btn__arrow"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                    <polyline points="13 5 20 12 13 19" />
+                  </svg>
+                </a>
+                <a class="btn btn--secondary" href="#contact">Contact Me</a>
+              </div>
+            </div>
+
+            <div class="hero__decor" aria-hidden="true">
+              <img
+                class="hero__mark"
+                src="assets/images/hero-mark.svg"
+                alt=""
+              />
             </div>
           </div>
         </div>
