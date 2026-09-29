@@ -440,30 +440,6 @@ ul {
   margin-top: 18px;
 }
 
-/* About sits directly above the USP card on the same background, so its
-   bottom padding is trimmed to keep the two feeling connected. */
-.section.about {
-  padding-bottom: 24px;
-}
-
-/* USP ----------------------------------------------------- */
-.usp {
-  padding-top: 24px; /* sits nearer to About, which shares this background */
-}
-
-.usp__statement {
-  max-width: 62ch;
-  margin: 0;
-  padding: 22px 26px;
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: var(--radius);
-  font-size: 1.1875rem; /* ~19px */
-  font-weight: 600;
-  line-height: 1.5;
-}
-
 /* Education timeline ------------------------------------- */
 .timeline {
   position: relative;
@@ -810,10 +786,6 @@ ul {
 @media (max-width: 600px) {
   .section {
     padding-block: 60px;
-  }
-
-  .usp {
-    padding-top: 16px;
   }
 
   .services__grid {
